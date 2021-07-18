@@ -48,6 +48,7 @@ def load_data():
 
     df["YearsCodePro"] = df["YearsCodePro"].apply(clean_experience)
     df["EdLevel"] = df["EdLevel"].apply(clean_education)
+    df = df.rename({"ConvertedComp": "Salary"}, axis=1)
     return df
 
 
@@ -74,3 +75,8 @@ def show_explore_page():
     st.write("""#### Number of data from different countries""")
 
     st.pyplot(fig1)
+
+    st.write("""#### Mean Salary Based On Country""")
+
+    data = df.groupby(["Country"])["Salary"].mean().sort_values(ascending=True)
+    st.bar_chart(data)
