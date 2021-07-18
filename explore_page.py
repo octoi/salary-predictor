@@ -52,3 +52,25 @@ def load_data():
 
 
 df = load_data()
+
+
+def show_explore_page():
+    st.title("Explore Software Engineer Salaries")
+
+    st.write("""### Stack Overflow Developer Survey 2020""")
+
+    data = df["Country"].value_counts()
+
+    fig1, ax1 = plt.subplots()
+    ax1.pie(
+        data,
+        labels=data.index,
+        autopct="%1.1f%%",
+        shadow=True,
+        startangle=90
+    )  # Equal aspect ratio ensures that pie is drawn as a circle.
+    ax1.axis("equal")
+
+    st.write("""#### Number of data from different countries""")
+
+    st.pyplot(fig1)
